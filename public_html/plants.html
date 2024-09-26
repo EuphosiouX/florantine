@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Michael Christopher">
+    <meta name="description" content="Plant Shop Website">
+    <title>Florantine</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/monstera-leaf.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+                Florantine
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="plants.html">Plants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pots.html">Pots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accessories.html">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactus.html">Contact Us</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero text-center py-4 bg-light">
+        <div class="container">
+            <h1>Indoor Plants</h1>
+            <p>Our selections of indoor plants.</p>
+        </div>
+    </section>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search for plants..."
+                        aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 bg-success-subtle">
+                <h4>Filter by</h4>
+                <div class="mb-4">
+                    <h5>Availability</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="in-stock" id="filterInStock">
+                        <label class="form-check-label" for="filterInStock">
+                            In Stock
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="out-of-stock" id="filterOutOfStock">
+                        <label class="form-check-label" for="filterOutOfStock">
+                            Out of Stock
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Price</h5>
+                    <input type="range" class="form-range" min="0" max="360" id="priceRange">
+                    <div class="d-flex justify-content-between">
+                        <span>$0</span>
+                        <span>$360</span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Category</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="succulent" id="filterSucculent">
+                        <label class="form-check-label" for="filterSucculent">
+                            Succulent
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="monstera" id="filterMonstera">
+                        <label class="form-check-label" for="filterMonstera">
+                            Monstera
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="philodendron" id="filterPhilodendron">
+                        <label class="form-check-label" for="filterPhilodendron">
+                            Philodendron
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="oxalis" id="filterOxalis">
+                        <label class="form-check-label" for="filterOxalis">
+                            Oxalis
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="syngonium" id="filterSyngonium">
+                        <label class="form-check-label" for="filterSyngonium">
+                            Syngonium
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Size</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="small" id="filterSmall">
+                        <label class="form-check-label" for="filterSmall">
+                            Small
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="medium" id="filterMedium">
+                        <label class="form-check-label" for="filterMedium">
+                            Medium
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="large" id="filterLarge">
+                        <label class="form-check-label" for="filterLarge">
+                            Large
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Special</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="discount" id="filterDiscount">
+                        <label class="form-check-label" for="filterDiscount">
+                            Discount
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="highlighted" id="filterHighlighted">
+                        <label class="form-check-label" for="filterHighlighted">
+                            Highlighted
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="famous" id="filterFamous">
+                        <label class="form-check-label" for="filterFamous">
+                            Famous
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <div class="row">
+                    <div id="Adansonii" class="col-md-4 mb-4 item-card" data-filter="in-stock, monstera, medium, discount, famous">
+                        <div class="card inner-card">
+                            <img src="images/adansonii.jpg" class="card-img-top" alt="Monstera Adansonii">
+                            <div class="card-body">
+                                <h5 class="card-title">SALE! Monstera Adansonii - 20cm Pot</h5>
+                                <p class="card-text">$21.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Standleyana" class="col-md-4 mb-4 item-card" data-filter="out-of-stock, monstera, small">
+                        <div class="card inner-card">
+                            <img src="images/standleyana.jpg" class="card-img-top" alt="Monstera Standleyana">
+                            <div class="card-body">
+                                <h5 class="card-title">Monstera Standleyana - 10cm pot</h5>
+                                <p class="card-text">$50.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Succulent" class="col-md-4 mb-4 item-card" data-filter="in-stock, succulent, small, highlighted">
+                        <div class="card inner-card">
+                            <img src="images/succulent.jpg" class="card-img-top" alt="Succulent">
+                            <div class="card-body">
+                                <h5 class="card-title">Assorted Succulent - 5cm pot</h5>
+                                <p class="card-text">$10.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="McDowell" class="col-md-4 mb-4 item-card" data-filter="in-stock, philodendron, large, discount">
+                        <div class="card inner-card">
+                            <img src="images/mcdowell.jpg" class="card-img-top" alt="Philodendron McDowell">
+                            <div class="card-body">
+                                <h5 class="card-title">SALE!! Philodendron McDowell - 70cm Pot</h5>
+                                <p class="card-text">$100.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="PinkSplash" class="col-md-4 mb-4 item-card"
+                        data-filter="out-of-stock, syngonium, medium, famous, highlighted">
+                        <div class="card inner-card">
+                            <img src="images/hanna-plants-Zf2nOR3dFQo-unsplash.jpg" class="card-img-top"
+                                alt="Syngonium Pink Splash">
+                            <div class="card-body">
+                                <h5 class="card-title">Syngonium "Pink Splash" - 25cm pot</h5>
+                                <p class="card-text">$50.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Melanochrysum" class="col-md-4 mb-4 item-card" data-filter="out-of-stock, philodendron, medium">
+                        <div class="card inner-card">
+                            <img src="images/feey-Mlbw-U7WWfE-unsplash.jpg" class="card-img-top"
+                                alt="Philodendron Melanochrysum">
+                            <div class="card-body">
+                                <h5 class="card-title">Philodendron Melanochrysum - 40cm Pot</h5>
+                                <p class="card-text">$60.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Palmifrons" class="col-md-4 mb-4 item-card" data-filter="in-stock, oxalis, small, highlighted">
+                        <div class="card inner-card">
+                            <img src="images/griselidis-gaillet-AA9zFLLJBIc-unsplash.jpg" class="card-img-top"
+                                alt="Oxalis Palmifrons">
+                            <div class="card-body">
+                                <h5 class="card-title">Oxalis Triangularis - 10cm Pot</h5>
+                                <p class="card-text">$21.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ThaiConstellation" class="col-md-4 mb-4 item-card" data-filter="in-stock, monstera, large, famous">
+                        <div class="card inner-card">
+                            <img src="images/feey-Ir5ssk4dSvs-unsplash.jpg" class="card-img-top"
+                                alt="Monstera Thai Constellation">
+                            <div class="card-body">
+                                <h5 class="card-title">Monstera Thai Constellation - 55cm pot</h5>
+                                <p class="card-text">$75.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Cactus" class="col-md-4 mb-4 item-card" data-filter="in-stock, succulent, small, discount">
+                        <div class="card inner-card">
+                            <img src="images/annie-spratt-fbAnIjhrOL4-unsplash.jpg" class="card-img-top" alt="Cactus">
+                            <div class="card-body">
+                                <h5 class="card-title">Cactus - 10cm Pot</h5>
+                                <p class="card-text">$10.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end bg-success-subtle" tabindex="-1" id="productDetailsOffcanvas"
+        aria-labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasLabel">Product Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <h5 id="offcanvasProductName"></h5>
+            <img id="offcanvasProductImg" class="card-img-top">
+            <p id="offcanvasProductDescription"></p>
+            <p><strong>Price: $<span id="offcanvasProductPrice"></span></strong></p>
+            <button class="btn btn-primary" id="addToCartOffcanvas">Add to Cart</button>
+        </div>
+    </div>
+
+    <footer class="text-center text-light">
+        <div class="container p-4">
+            <p>&copy; 2024 Plant Store. All Rights Reserved.</p>
+            <p>Last Updated: <span id="lastUpdated"></span></p>
+            <p>Contact us: florantine@info.com</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="footer.js"></script>
+    <script src="shop_page.js"></script>
+    <script src="description.js"></script>
+    <script src="cart.js"></script>
+</body>
+
+</html>

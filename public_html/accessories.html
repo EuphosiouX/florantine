@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Michael Christopher">
+    <meta name="description" content="Plant Shop Website">
+    <title>Florantine</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/monstera-leaf.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+                Florantine
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="plants.html">Plants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pots.html">Pots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accessories.html">Accessories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactus.html">Contact Us</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero text-center py-4 bg-light">
+        <div class="container">
+            <h1>Accessories</h1>
+            <p>Our wide range of gardening accessories.</p>
+        </div>
+    </section>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search for accessories..."
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 bg-success-subtle">
+                <h4>Filter by</h4>
+                <div class="mb-4">
+                    <h5>Availability</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="inStock">
+                        <label class="form-check-label" for="inStock">
+                            In Stock
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="outOfStock">
+                        <label class="form-check-label" for="outOfStock">
+                            Out of Stock
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Price</h5>
+                    <input type="range" class="form-range" min="0" max="360" id="priceRange">
+                    <div class="d-flex justify-content-between">
+                        <span>$0</span>
+                        <span>$360</span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Usage</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="indoor">
+                        <label class="form-check-label" for="indoor">
+                            indoor
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="outdoor">
+                        <label class="form-check-label" for="outdoor">
+                            outdoor
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/anne-nygard-eJseU5B3Mgk-unsplash.jpg" class="card-img-top" alt="Rake">
+                            <div class="card-body">
+                                <h5 class="card-title">Rake</h5>
+                                <p class="card-text">$40.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/feey-ok2CQkIKXEE-unsplash.jpg" class="card-img-top" alt="Shovel">
+                            <div class="card-body">
+                                <h5 class="card-title">Shovel</h5>
+                                <p class="card-text">$30.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/markus-spiske-eKmwptiw_3o-unsplash.jpg" class="card-img-top"
+                                alt="Pruning Shear">
+                            <div class="card-body">
+                                <h5 class="card-title">Pruning Shear</h5>
+                                <p class="card-text">$25.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/anne-nygard-eJseU5B3Mgk-unsplash.jpg" class="card-img-top" alt="Rake">
+                            <div class="card-body">
+                                <h5 class="card-title">Rake</h5>
+                                <p class="card-text">$40.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/feey-ok2CQkIKXEE-unsplash.jpg" class="card-img-top" alt="Shovel">
+                            <div class="card-body">
+                                <h5 class="card-title">Shovel</h5>
+                                <p class="card-text">$30.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/markus-spiske-eKmwptiw_3o-unsplash.jpg" class="card-img-top"
+                                alt="Pruning Shear">
+                            <div class="card-body">
+                                <h5 class="card-title">Pruning Shear</h5>
+                                <p class="card-text">$25.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/anne-nygard-eJseU5B3Mgk-unsplash.jpg" class="card-img-top" alt="Rake">
+                            <div class="card-body">
+                                <h5 class="card-title">Rake</h5>
+                                <p class="card-text">$40.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/feey-ok2CQkIKXEE-unsplash.jpg" class="card-img-top" alt="Shovel">
+                            <div class="card-body">
+                                <h5 class="card-title">Shovel</h5>
+                                <p class="card-text">$30.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="images/markus-spiske-eKmwptiw_3o-unsplash.jpg" class="card-img-top"
+                                alt="Pruning Shear">
+                            <div class="card-body">
+                                <h5 class="card-title">Pruning Shear</h5>
+                                <p class="card-text">$25.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-light">
+        <div class="container p-4">
+            <p>&copy; 2024 Plant Store. All Rights Reserved.</p>
+            <p>Last Updated: <span id="lastUpdated"></span></p>
+            <p>Contact us: florantine@info.com</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>
