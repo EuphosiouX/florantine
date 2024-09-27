@@ -24,14 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Tell our application to serve all the files under the `public_html` directory
 app.use(express.static('public_html'))
 
-function isAuthenticated(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect('/login.html');
-    }
-}
-
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     const saltRounds = 10;
