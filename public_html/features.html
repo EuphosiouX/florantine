@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florantine Feature Implementation Tutorial</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to Florantine's existing stylesheet -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2d6a4f;
+            font-family: 'Merriweather', serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background-color: #f1f1f1;
+            border-left: 4px solid #2d6a4f;
+            padding: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .feature-section {
+            margin-bottom: 40px;
+        }
+
+        .feature-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Florantine Feature Implementation Tutorial</h1>
+        <p>Welcome to Florantine’s tutorial on implementing secure user authentication and user-friendly features in a
+            web application. Below, we will go over the implementation of secure login mechanisms, user session
+            persistence, redirection of unauthenticated users, and the search/filter functionality for our product
+            listings. This tutorial aims to help developers understand these features and integrate them into their
+            projects easily.</p>
+
+        <div class="feature-section">
+            <h2>1. Secure User Authentication Mechanisms</h2>
+            <p>One of the key security measures is ensuring that passwords are not stored or transmitted in plain text.
+                Here's how we implemented secure user authentication in the Florantine website:</p>
+            <ul>
+                <li><strong>Password Encryption:</strong> We use bcrypt, a strong hashing function, to encrypt passwords
+                    before storing them in the SQLite database.</li>
+                <li><strong>Secure Transmission:</strong> The login form sends data via a POST request. Passwords are
+                    hashed on the server before they are stored or compared.</li>
+            </ul>
+            <h3>Example Code for Registration:</h3>
+            <div class="code-block">
+                <pre>
+app.post('/register', async (req, res) => {
+    const { username, email, password } = req.body;
+    const saltRounds = 10;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        db.run(`INSERT INTO users (username, email, password) VALUES (?, ?, ?)`, [username, email, hashedPassword], function (err) {
+            if (err) {
+                return res.status(500).send('User already exists');
+            }
+            res.send('User registered successfully');
+        });
+    } catch (err) {
+        res.status(500).send('Error registering user');
+    }
+});
+                </pre>
+            </div>
+            <div class="code-block">
+                <pre>
+document.getElementById('registerForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    let username = document.getElementById("username").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error('register failed');
+            }
+        })
+        .then(data => {
+            console.log(data);
+            if (data === 'User registered successfully') {
+                window.location.href = 'login.html';
+            } else {
+                document.getElementById('registerFeedback').textContent = 'Try again.';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('registerFeedback').textContent = 'Username already exist. Try again.';
+        });
+});
+                </pre>
+            </div>
+
+            <h3>Example Code for Login:</h3>
+            <div class="code-block">
+                <pre>
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    db.get(`SELECT * FROM users WHERE username = ?`, [username], async (err, user) => {
+        if (err || !user) {
+            return res.status(400).send('User not found');
+        }
+
+        const match = await bcrypt.compare(password, user.password);
+        if (match) {
+            req.session.user = username;  // Set the session with the username
+            res.send('Login successful');
+        } else {
+            res.status(401).send('Invalid credentials');
+        }
+    });
+});
+                </pre>
+            </div>
+            <div class="code-block">
+                <pre>
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    })
+        .then(response => response.text())
+        .then(data => {
+            if (data === 'Login successful') {
+                window.location.href = 'profile.html';  // Redirect to profile after login
+            } else {
+                document.getElementById('loginFeedback').textContent = 'Invalid credentials. Try again.';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+                </pre>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2>2. Redirecting Unauthenticated Users to Login</h2>
+            <p>For a secure user experience, unauthenticated users are automatically redirected to the login page when
+                attempting to access restricted pages (such as the profile page). This ensures that only logged-in users
+                can access sensitive data.</p>
+            <h3>Implementation:</h3>
+            <div class="code-block">
+                <pre>
+app.get('/api/profile', (req, res) => {
+    if (!req.session.user) {
+        console.log('Unauthorized: No session found');
+        return res.status(401).json({ message: 'Unauthorized' });  // Send JSON error if not logged in
+    }
+
+    const username = req.session.user;
+    console.log('Fetching profile for username:', username);
+
+    db.get('SELECT username, email FROM users WHERE username = ?', [username], (err, user) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Failed to fetch profile details' });
+        }
+
+        if (!user) {
+            console.log('User not found in database');
+            return res.status(500).json({ error: 'User not found' });
+        }
+
+        res.json(user);  // Send the user's profile as JSON
+    });
+});
+                </pre>
+            </div>
+            <div class="code-block">
+                <pre>
+window.addEventListener('load', function () {
+    // Fetch profile data from the server
+    fetch('/api/profile', { method: 'GET' })
+        .then(response => {
+            if (response.status === 401) {
+                window.location.href = 'login.html';  // Redirect to login if not authenticated
+            } else if (response.status === 500) {
+                throw new Error('Server error while fetching profile');  // Handle server error
+            } else {
+                return response.json();  // Parse the response data as JSON
+            }
+        })
+        .then(profile => {
+            if (profile) {
+                document.getElementById('profileDetails').innerHTML = `
+                    <p><strong>Username:</strong> ${profile.username}</p>
+                    <p><strong>Email:</strong> ${profile.email}</p>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching profile:', error);  // Log error details
+            alert('An error occurred while fetching your profile. Please try again later.');
+        });
+});
+
+document.getElementById('logoutBtn').addEventListener('click', function () {
+    fetch('/logout', { method: 'GET' })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = 'index.html';  // Redirect to index.html
+            } else {
+                console.error('Logout failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error logging out:', error);
+        });
+});
+                </pre>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2>3. Session Persistence</h2>
+            <p>Once a user logs in, their session is maintained using Express sessions. This allows users to stay logged
+                in across different pages without having to re-enter credentials. Sessions are stored in memory or can
+                be configured to use external storage like Redis or a database for larger applications.</p>
+            <h3>Session Management Code:</h3>
+            <div class="code-block">
+                <pre>
+app.use(session({
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 30 * 60 * 1000 }  // Set session to expire after 30 minutes
+}));                    
+                </pre>
+            </div>
+            <p>In this setup, the session cookie expires after 30 minutes of inactivity, after which the user will need
+                to log in again. You can adjust the session duration and other options according to your needs.</p>
+        </div>
+
+        <div class="feature-section">
+            <h2>4. Search and Filter Features</h2>
+            <p>Florantine’s plant page allows users to easily filter products based on criteria such as availability,
+                size, and discounts. We use checkboxes for filtering and a search bar for finding specific products.
+                Below is an overview of how this feature was implemented:</p>
+            <ul>
+                <li><strong>Search Bar:</strong> Allows users to search for plants by name.</li>
+                <li><strong>Checkbox Filtering:</strong> Users can filter plants based on criteria such as "Out of
+                    Stock", "Large", "Small", and "Discounted".</li>
+            </ul>
+            <h3>Example Code for Search and Filter:</h3>
+            <div class="code-block">
+                <pre>
+const itemCards = document.querySelectorAll('.item-card');
+let a;
+
+function getInfo(info){
+    return info;
+}
+
+itemCards.forEach(card => {
+    const filters = card.getAttribute('data-filter').split(',').map(filter => filter.trim());
+    const id = card.id;
+
+    if (filters[0] == "out-of-stock") {
+        card.style.opacity = 0.5;
+        card.children[0].classList.toggle("inner-card", false);
+    } else {
+        card.addEventListener('click', function () {
+            const info = getInfo(plantInfo);
+            const name = info[id].name;
+            const img = info[id].img;
+            const price = info[id].price;
+            const description = info[id].description;
+    
+            document.getElementById('offcanvasProductName').textContent = name;
+            document.getElementById('offcanvasProductImg').src = img;
+            document.getElementById('offcanvasProductDescription').textContent = description;
+            document.getElementById('offcanvasProductPrice').textContent = price;
+    
+            const offcanvasElement = document.getElementById('productDetailsOffcanvas');
+            const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+            bsOffcanvas.show();
+    
+            document.getElementById('addToCartOffcanvas').onclick = function () {
+                alert(name + " added to cart!");
+                addToCart(name, parseFloat(price));
+            };
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const filterCheckboxes = document.querySelectorAll('input[id^="filter"]');
+    const searchInput = document.querySelector('input[type="search"]');
+
+    function filterItems() {
+        const searchText = searchInput.value.toLowerCase();
+
+        const selectedFilter = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        itemCards.forEach(card => {
+            const plantTitle = card.querySelector('.card-title').textContent.toLowerCase();
+            const filters = card.getAttribute('data-filter').split(',').map(filter => filter.trim());
+
+            const matchesSearch = plantTitle.includes(searchText);
+            const matchesFilter = selectedFilter.every(filter => filters.includes(filter));
+
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    searchInput.addEventListener('input', filterItems);
+
+    filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterItems);
+    });
+});
+                </pre>
+            </div>
+            <p>With this feature, users can dynamically filter the plant listings to match their search and selected
+                criteria, making the shopping experience more efficient and tailored to their preferences.</p>
+        </div>
+
+        <div class="feature-section">
+            <h2>Conclusion</h2>
+            <p>These features make the Florantine website secure and user-friendly, allowing for safe authentication,
+                persistent sessions, and dynamic product filtering. This tutorial can serve as a guide for developers
+                looking to implement similar features in their own web applications.</p>
+        </div>
+    </div>
+</body>
+
+</html>
